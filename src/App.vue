@@ -1,17 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <input type="text" class="form-control w-25" v-model="maximum" />
+
+  <div
+    class="row d-flex mb-3 align-items-center"
+    v-for="(clothing, index) in maxPriceFilter"
+    :key="index"
+  >
+    <ClothingItem
+      :name="clothing.name"
+      :description="clothing.description"
+      :price="clothing.price"
+      :image="clothing.image"
+    />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ClothingItem from "./components/ClothingItem.vue";
+import { products, maximum } from "./data/data";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      clothes: products,
+      maximum: maximum,
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    ClothingItem,
+  },
+  computed: {
+    maxPriceFilter: function () {
+      return this.clothes.filter(
+        (clothing) => clothing.price <= Number(this.maximum)
+      );
+    },
+  },
+};
 </script>
 
 <style>
