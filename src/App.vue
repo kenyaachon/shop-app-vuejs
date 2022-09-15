@@ -1,7 +1,22 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <input type="text" class="form-control w-25" v-model="maximum" />
+  <div class="form-inline mr-auto">
+    <label class="font-weight-bold mr-2" for="priceFilter">Max Price</label>
+    <input
+      id="priceFilter"
+      type="text"
+      class="form-control w-25"
+      v-model="maximum"
+    />
+  </div>
 
+  <input
+    type="range"
+    class="custom-range"
+    min="0"
+    max="200"
+    v-model="maximum"
+  />
   <div
     class="row d-flex mb-3 align-items-center"
     v-for="(clothing, index) in maxPriceFilter"
@@ -18,14 +33,14 @@
 
 <script>
 import ClothingItem from "./components/ClothingItem.vue";
-import { products, maximum } from "./data/data";
+// import { products, maximum } from "./data/data";
 
 export default {
   name: "App",
   data() {
     return {
-      clothes: products,
-      maximum: maximum,
+      clothes: [],
+      maximum: 99,
     };
   },
   components: {
@@ -37,6 +52,13 @@ export default {
         (clothing) => clothing.price <= Number(this.maximum)
       );
     },
+  },
+  mounted: function () {
+    fetch("https://hplussport.com/api/products/order/price")
+      .then((response) => response.json())
+      .then((data) => {
+        this.clothes = data;
+      });
   },
 };
 </script>
