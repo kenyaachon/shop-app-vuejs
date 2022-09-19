@@ -1,26 +1,28 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <Navigation :cart="cart" />
+  <Navigation :cart="cart" @toggle-slider="sliderStatus = !sliderStatus" />
   <!-- <PriceFilter v-model="maximum" /> -->
 
   <h1>My Shop</h1>
-  <div class="d-flex align-items-center">
-    <label :class="labelArr" for="priceFilter">Max Price</label>
-    <input
-      id="priceFilter"
-      type="text"
-      class="form-control mx-2"
-      :style="{ width: inputWidth + 'px', textAlign: 'center' }"
-      v-model="maximum"
-    />
-    <input
-      type="range"
-      class="custom-range"
-      min="0"
-      max="200"
-      v-model="maximum"
-    />
-  </div>
+  <Transition>
+    <div class="align-items-center" :class="sliderState">
+      <label :class="labelArr" for="priceFilter">Max Price</label>
+      <input
+        id="priceFilter"
+        type="text"
+        class="form-control mx-2"
+        :style="{ width: inputWidth + 'px', textAlign: 'center' }"
+        v-model="maximum"
+      />
+      <input
+        type="range"
+        class="custom-range"
+        min="0"
+        max="200"
+        v-model="maximum"
+      />
+    </div>
+  </Transition>
 
   <!-- <Products :maxPriceFilter="maxPriceFilter" v-model="cart" /> -->
   <div
@@ -51,6 +53,7 @@ export default {
   data() {
     return {
       clothes: [],
+      sliderStatus: true,
       maximum: 99,
       cart: [],
       labelArr: ["font-weight-bold", "mr-2"],
@@ -73,6 +76,9 @@ export default {
         (clothing) => clothing.price <= Number(this.maximum)
       );
     },
+    sliderState: function () {
+      return this.sliderStatus ? "d-flex" : "d-none";
+    },
   },
   mounted: function () {
     fetch("https://hplussport.com/api/products/order/price")
@@ -92,5 +98,16 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
