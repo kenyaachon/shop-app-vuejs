@@ -4,8 +4,8 @@
   <!-- <PriceFilter v-model="maximum" /> -->
 
   <h1>My Shop</h1>
-  <Transition>
-    <div class="align-items-center" :class="sliderState">
+  <transition name="fade">
+    <div class="align-items-center" v-if="sliderStatus" :class="sliderState">
       <label :class="labelArr" for="priceFilter">Max Price</label>
       <input
         id="priceFilter"
@@ -22,29 +22,38 @@
         v-model="maximum"
       />
     </div>
-  </Transition>
+  </transition>
 
   <!-- <Products :maxPriceFilter="maxPriceFilter" v-model="cart" /> -->
-  <div
-    class="row d-flex mb-3 align-items-center"
-    v-for="(clothing, index) in maxPriceFilter"
-    :key="index"
+  <transition-group
+    name="fade"
+    tag="div"
+    enter-active-class="animate__animated animate__fadeInRight"
+    leave-enter-class="animate__animated animate__fadeOutRight"
   >
-    <div class="col-1 m-auto">
-      <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+    <div
+      class="row d-flex mb-3 align-items-center"
+      v-for="clothing of maxPriceFilter"
+      :key="clothing.id"
+    >
+      <div class="col-1 m-auto">
+        <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+      </div>
+
+      <ClothingItem
+        :name="clothing.name"
+        :description="clothing.description"
+        :price="clothing.price"
+        :image="clothing.image"
+      />
     </div>
-    <ClothingItem
-      :name="clothing.name"
-      :description="clothing.description"
-      :price="clothing.price"
-      :image="clothing.image"
-    />
-  </div>
+  </transition-group>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
 import ClothingItem from "./components/ClothingItem.vue";
+import "animate.css";
 // import Products from "./components/Products.vue";
 // import PriceFilter from "./components/PriceFilter.vue";
 
@@ -100,14 +109,11 @@ export default {
   margin-top: 60px;
 }
 
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-
-.v-enter-from,
-.v-leave-to {
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
 </style>
