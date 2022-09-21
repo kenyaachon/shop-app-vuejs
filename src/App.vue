@@ -24,8 +24,8 @@
     </div>
   </transition>
 
-  <!-- <Products :maxPriceFilter="maxPriceFilter" v-model="cart" /> -->
-  <transition-group
+  <Products :maxPriceFilter="maxPriceFilter" @add="addItem" />
+  <!-- <transition-group
     name="fade"
     tag="div"
     enter-active-class="animate__animated animate__fadeInRight"
@@ -37,7 +37,7 @@
       :key="clothing.id"
     >
       <div class="col-1 m-auto">
-        <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+        <button class="btn btn-info" v-on:click="addItem()">+</button>
       </div>
 
       <ClothingItem
@@ -47,14 +47,14 @@
         :image="clothing.image"
       />
     </div>
-  </transition-group>
+  </transition-group> -->
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
-import ClothingItem from "./components/ClothingItem.vue";
+// import ClothingItem from "./components/ClothingItem.vue";
 import "animate.css";
-// import Products from "./components/Products.vue";
+import Products from "./components/Products.vue";
 // import PriceFilter from "./components/PriceFilter.vue";
 
 export default {
@@ -71,12 +71,13 @@ export default {
   },
   components: {
     Navigation,
-    ClothingItem,
-    // Products,
+    // ClothingItem,
+    Products,
   },
   methods: {
     addItem: function (product) {
-      this.cart.push(product);
+      // this.console.log(product.id);
+      this.cart.push({ product: product, qty: 1 });
     },
   },
   computed: {

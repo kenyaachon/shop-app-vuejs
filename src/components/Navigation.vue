@@ -7,9 +7,32 @@
       >
         <!-- <i class="fas fa-dollar-sign"></i> -->
       </button>
-      <div class="ml-2" v-if="cart.length >= 0">
-        <b>cart:</b>
-        <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+      <div class="dropdown ml-2">
+        <button
+          class="btn btn-success btn-sm dropdown-toggle"
+          id="cartDropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <b>cart:</b>
+          <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="cartDropdown"
+        >
+          <div v-for="(item, index) in cart" :key="index">
+            <div class="dropdown-item-text text-nowrap text-right">
+              <span
+                class="badge badge-pill badge-warning align-text-top mr-1"
+                >{{ item.qty }}</span
+              >
+              {{ item.product.name }}
+              <b>{{ currency(item.product.price) }}</b>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -25,12 +48,20 @@
 
 export default {
   name: "NavigationBar",
-  props: ["cart"],
+  props: {
+    cart: {
+      type: Array,
+      required: "true",
+    },
+  },
   //   emits: ["toggleSlider"],
   methods: {
     toggleSlider() {
       //   this.$emit("toggleSlider");
       console.log("hello something interesting");
+    },
+    currency: function (value) {
+      return "$" + Number.parseFloat(value).toFixed(2);
     },
   },
 };
