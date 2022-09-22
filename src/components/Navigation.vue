@@ -17,8 +17,10 @@
           aria-expanded="true"
           @click="toggleDropDown"
         >
+          <span class="badge badge-pill badge-success">{{ cartTotal }}</span>
+
           <b>cart:</b>
-          <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+          <span class="badge badge-pill badge-success">{{ cartSize }}</span>
         </button>
         <div
           class="dropdown-menu dropdown-menu-right"
@@ -78,6 +80,22 @@ export default {
   computed: {
     dropDownMenu() {
       return this.dropDownStatus ? "show" : "";
+    },
+    cartSize() {
+      let size = 0;
+
+      this.cart.forEach((item) => {
+        size += item.qty;
+      });
+      return size;
+    },
+    cartTotal() {
+      let total = 0;
+      this.cart.forEach((item) => {
+        total += item.qty * item.product.price;
+      });
+
+      return this.currency(total);
     },
   },
 };

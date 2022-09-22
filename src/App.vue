@@ -77,7 +77,21 @@ export default {
   methods: {
     addItem: function (product) {
       // this.console.log(product.id);
-      this.cart.push({ product: product, qty: 1 });
+
+      let existingItem;
+      const existing = this.cart.filter(function (item, index) {
+        if (item.product.id == Number(product.id)) {
+          existingItem = index;
+          return true;
+        }
+        return false;
+      });
+
+      if (existing.length) {
+        this.cart[existingItem].qty++;
+      } else {
+        this.cart.push({ product: product, qty: 1 });
+      }
     },
   },
   computed: {
