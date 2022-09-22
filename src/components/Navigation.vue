@@ -10,10 +10,12 @@
       <div class="dropdown ml-2">
         <button
           class="btn btn-success btn-sm dropdown-toggle"
+          type="button"
           id="cartDropdown"
           data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false"
+          aria-expanded="true"
+          @click="toggleDropDown"
         >
           <b>cart:</b>
           <span class="badge badge-pill badge-success">{{ cart.length }}</span>
@@ -21,6 +23,7 @@
         <div
           class="dropdown-menu dropdown-menu-right"
           aria-labelledby="cartDropdown"
+          :class="dropDownMenu"
         >
           <div v-for="(item, index) in cart" :key="index">
             <div class="dropdown-item-text text-nowrap text-right">
@@ -54,6 +57,11 @@ export default {
       required: "true",
     },
   },
+  data() {
+    return {
+      dropDownStatus: false,
+    };
+  },
   //   emits: ["toggleSlider"],
   methods: {
     toggleSlider() {
@@ -62,6 +70,14 @@ export default {
     },
     currency: function (value) {
       return "$" + Number.parseFloat(value).toFixed(2);
+    },
+    toggleDropDown() {
+      return (this.dropDownStatus = !this.dropDownStatus);
+    },
+  },
+  computed: {
+    dropDownMenu() {
+      return this.dropDownStatus ? "show" : "";
     },
   },
 };
