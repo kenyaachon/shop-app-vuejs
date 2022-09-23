@@ -1,6 +1,10 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <Navigation :cart="cart" @toggle-slider="sliderStatus = !sliderStatus" />
+  <Navigation
+    :cart="cart"
+    @toggle-slider="sliderStatus = !sliderStatus"
+    @delete="deleteItem"
+  />
   <!-- <PriceFilter v-model="maximum" /> -->
 
   <h1>My Shop</h1>
@@ -69,6 +73,14 @@ export default {
       } else {
         this.cart.push({ product: product, qty: 1 });
       }
+    },
+    deleteItem: function (desiredItem) {
+      this.cart = this.cart.filter((item) => {
+        if (item.product.id == Number(desiredItem.product.id)) {
+          return false;
+        }
+        return true;
+      });
     },
   },
   computed: {

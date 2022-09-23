@@ -7,10 +7,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faShoppingCart,
   faDollarSign,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faShoppingCart, faDollarSign);
+library.add(faShoppingCart, faDollarSign, faTrashCan);
 
 /* import font awesome icon component */
 

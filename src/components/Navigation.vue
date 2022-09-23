@@ -35,6 +35,9 @@
               >
               {{ item.product.name }}
               <b>{{ currency(item.product.price) }}</b>
+              <a href="#" @click="deleteItem(item)">
+                <font-awesome-icon icon="fa-solid fa-trash-can" />
+              </a>
             </div>
           </div>
         </div>
@@ -69,6 +72,9 @@ export default {
     toggleDropDown() {
       return (this.dropDownStatus = !this.dropDownStatus);
     },
+    deleteItem(specifiedItem) {
+      this.$emit("delete", specifiedItem);
+    },
   },
   computed: {
     dropDownMenu() {
@@ -81,6 +87,9 @@ export default {
         size += item.qty;
       });
       return size;
+    },
+    cartList() {
+      return this.cart;
     },
     cartTotal() {
       let total = 0;
