@@ -35,6 +35,9 @@
               >
               {{ item.product.name }}
               <b>{{ currency(item.product.price) }}</b>
+              <a href="#" @click="reduceCartSize(index)">
+                <font-awesome-icon icon="fa-solid fa-square-minus"
+              /></a>
               <a href="#" @click="deleteItem(item)">
                 <font-awesome-icon icon="fa-solid fa-trash-can" />
               </a>
@@ -75,6 +78,9 @@ export default {
     deleteItem(specifiedItem) {
       this.$emit("delete", specifiedItem);
     },
+    reduceCartSize(id) {
+      this.$emit("smaller", id);
+    },
   },
   computed: {
     dropDownMenu() {
@@ -88,9 +94,7 @@ export default {
       });
       return size;
     },
-    cartList() {
-      return this.cart;
-    },
+
     cartTotal() {
       let total = 0;
       this.cart.forEach((item) => {

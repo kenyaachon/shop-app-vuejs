@@ -4,6 +4,7 @@
     :cart="cart"
     @toggle-slider="sliderStatus = !sliderStatus"
     @delete="deleteItem"
+    @smaller="reduceCartSize"
   />
   <!-- <PriceFilter v-model="maximum" /> -->
 
@@ -81,6 +82,13 @@ export default {
         }
         return true;
       });
+    },
+    reduceCartSize: function (id) {
+      if (this.cart[id].qty > 1) {
+        this.cart[id].qty--;
+      } else {
+        this.deleteItem(this.cart[id]);
+      }
     },
   },
   computed: {

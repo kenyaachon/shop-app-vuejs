@@ -8,10 +8,11 @@ import {
   faShoppingCart,
   faDollarSign,
   faTrashCan,
+  faSquareMinus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faShoppingCart, faDollarSign, faTrashCan);
+library.add(faShoppingCart, faDollarSign, faTrashCan, faSquareMinus);
 
 /* import font awesome icon component */
 
