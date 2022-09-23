@@ -5,7 +5,7 @@
         class="btn btn-sm btn-outline-success"
         @click="$emit('toggleSlider')"
       >
-        <!-- <i class="fas fa-dollar-sign"></i> -->
+        <font-awesome-icon icon="fa-solid fa-dollar-sign" />
       </button>
       <div class="dropdown ml-2">
         <button
@@ -19,7 +19,7 @@
         >
           <span class="badge badge-pill badge-success">{{ cartTotal }}</span>
 
-          <b>cart:</b>
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
           <span class="badge badge-pill badge-success">{{ cartSize }}</span>
         </button>
         <div
@@ -44,13 +44,6 @@
 </template>
 
 <script>
-// /* add fontawesome core */
-// import { library } from '@fortawesome/fontawesome-svg-core'
-
-// import {fa-dollar-sign} from ''
-
-// library.add(fa)
-
 export default {
   name: "NavigationBar",
   props: {
