@@ -6,38 +6,19 @@
     @delete="deleteItem"
     @smaller="reduceCartSize"
   />
-  <!-- <PriceFilter v-model="maximum" /> -->
 
   <h1>My Shop</h1>
-  <transition name="fade">
-    <div class="align-items-center" v-if="sliderStatus" :class="sliderState">
-      <label :class="labelArr" for="priceFilter">Max Price</label>
-      <input
-        id="priceFilter"
-        type="text"
-        class="form-control mx-2"
-        :style="{ width: inputWidth + 'px', textAlign: 'center' }"
-        v-model="maximum"
-      />
-      <input
-        type="range"
-        class="custom-range"
-        min="0"
-        max="200"
-        v-model="maximum"
-      />
-    </div>
-  </transition>
+  <PriceFilter v-model:maximum="maximum" :slider-status="sliderStatus" />
 
   <Products :maxPriceFilter="maxPriceFilter" @add="addItem" />
 </template>
 
 <script>
-import Navigation from "./components/Navigation.vue";
-// import ClothingItem from "./components/ClothingItem.vue";
 import "animate.css";
+
+import Navigation from "./components/Navigation.vue";
 import Products from "./components/Products.vue";
-// import PriceFilter from "./components/PriceFilter.vue";
+import PriceFilter from "./components/PriceFilter.vue";
 
 export default {
   name: "App",
@@ -53,7 +34,7 @@ export default {
   },
   components: {
     Navigation,
-    // ClothingItem,
+    PriceFilter,
     Products,
   },
   methods: {
@@ -97,9 +78,6 @@ export default {
         (clothing) => clothing.price <= Number(this.maximum)
       );
     },
-    sliderState: function () {
-      return this.sliderStatus ? "d-flex" : "d-none";
-    },
   },
   mounted: function () {
     fetch("https://hplussport.com/api/products/order/price")
@@ -119,13 +97,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
 }
 </style>
