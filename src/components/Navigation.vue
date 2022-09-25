@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     dropDownMenu() {
-      return this.dropDownStatus ? "show" : "";
+      return this.dropDownStatus && this.cart.length > 0 ? "show" : "";
     },
     cartSize() {
       let size = 0;

@@ -13,7 +13,12 @@
 <script>
 export default {
   name: "ClothingItem",
-  props: ["name", "description", "price", "image"],
+  props: {
+    name: String,
+    description: String,
+    price: String,
+    image: String,
+  },
   methods: {
     currency: function (value) {
       return "$" + Number.parseFloat(value).toFixed(2);
