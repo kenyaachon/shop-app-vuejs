@@ -6,11 +6,14 @@
   <div class="col">
     <h3 class="text-info">{{ name }}</h3>
     <p class="mb-0">{{ description }}</p>
-    <div class="h5 float-right">{{ currency(price) }}</div>
+    <!-- <div class="h5 float-right">{{ currency(price) }}</div> -->
+    <Price :price="Number(price)" />
   </div>
 </template>
 
 <script>
+import Price from "./Price.vue";
+
 export default {
   name: "ClothingItem",
   props: {
@@ -23,6 +26,9 @@ export default {
     currency: function (value) {
       return "$" + Number.parseFloat(value).toFixed(2);
     },
+  },
+  components: {
+    Price,
   },
 };
 </script>

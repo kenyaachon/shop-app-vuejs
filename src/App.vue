@@ -1,6 +1,6 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <Navigation
+  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+  <!-- <Navigation
     :cart="cart"
     @toggle-slider="sliderStatus = !sliderStatus"
     @delete="deleteItem"
@@ -10,15 +10,33 @@
   <h1>My Shop</h1>
   <PriceFilter v-model:maximum="maximum" :slider-status="sliderStatus" />
 
-  <Products :maxPriceFilter="maxPriceFilter" @add="addItem" />
+  <ProductsList :maxPriceFilter="maxPriceFilter" @add="addItem" /> -->
+  <CheckOut
+    :cart="cart"
+    @delete="deleteItem"
+    @smaller="reduceCartSize"
+    @add="addItem"
+  />
+  <Products
+    :cart="cart"
+    @toggle-slider="sliderStatus = !sliderStatus"
+    @delete="deleteItem"
+    @smaller="reduceCartSize"
+    :maxPriceFilter="maxPriceFilter"
+    @add="addItem"
+    v-model:maximum="maximum"
+    :slider-status="sliderStatus"
+  />
 </template>
 
 <script>
 import "animate.css";
-
-import Navigation from "./components/Navigation.vue";
 import Products from "./components/Products.vue";
-import PriceFilter from "./components/PriceFilter.vue";
+import CheckOut from "./components/CheckOut.vue";
+
+// import Navigation from "./components/Navigation.vue";
+// import ProductsList from "./components/ProductsList.vue";
+// import PriceFilter from "./components/PriceFilter.vue";
 
 export default {
   name: "App",
@@ -33,9 +51,8 @@ export default {
     };
   },
   components: {
-    Navigation,
-    PriceFilter,
     Products,
+    CheckOut,
   },
   methods: {
     addItem: function (product) {

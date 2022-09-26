@@ -3,7 +3,7 @@
     <div class="navbar-text ml-auto d-flex">
       <button
         class="btn btn-sm btn-outline-success"
-        @click="$emit('toggleSlider')"
+        @click="$parent.$emit('toggleSlider')"
       >
         <font-awesome-icon icon="fa-solid fa-dollar-sign" />
       </button>
@@ -76,10 +76,10 @@ export default {
       return (this.dropDownStatus = !this.dropDownStatus);
     },
     deleteItem(specifiedItem) {
-      this.$emit("delete", specifiedItem);
+      this.$parent.$emit("delete", specifiedItem);
     },
     reduceCartSize(id) {
-      this.$emit("smaller", id);
+      this.$parent.$emit("smaller", id);
     },
   },
   computed: {
