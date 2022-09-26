@@ -1,42 +1,18 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <Navigation
-    :cart="cart"
-    @toggle-slider="sliderStatus = !sliderStatus"
-    @delete="deleteItem"
-    @smaller="reduceCartSize"
-  />
-
-  <h1>My Shop</h1>
-  <PriceFilter v-model:maximum="maximum" :slider-status="sliderStatus" />
-
-  <ProductsList :maxPriceFilter="maxPriceFilter" @add="addItem" /> -->
-  <CheckOut
+  <router-view
     :cart="cart"
     @delete="deleteItem"
     @smaller="reduceCartSize"
     @add="addItem"
-  />
-  <Products
-    :cart="cart"
     @toggle-slider="sliderStatus = !sliderStatus"
-    @delete="deleteItem"
-    @smaller="reduceCartSize"
     :maxPriceFilter="maxPriceFilter"
-    @add="addItem"
     v-model:maximum="maximum"
     :slider-status="sliderStatus"
-  />
+  ></router-view>
 </template>
 
 <script>
 import "animate.css";
-import Products from "./components/Products.vue";
-import CheckOut from "./components/CheckOut.vue";
-
-// import Navigation from "./components/Navigation.vue";
-// import ProductsList from "./components/ProductsList.vue";
-// import PriceFilter from "./components/PriceFilter.vue";
 
 export default {
   name: "App",
@@ -49,10 +25,6 @@ export default {
       labelArr: ["font-weight-bold", "mr-2"],
       inputWidth: 60,
     };
-  },
-  components: {
-    Products,
-    CheckOut,
   },
   methods: {
     addItem: function (product) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>CheckOut</h1>
-    <table class="table table-hover">
+    <table class="table table-hover" v-if="cart.length">
       <caption class="text-right h3">
         <b>Total:</b>
         <Price
