@@ -30,4 +30,4 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-![Screen Shot](/shop-app/pictures/photo1.png)
+![Screen Shot](./pictures/photo1.png)
