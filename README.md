@@ -29,3 +29,5 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+![Screen Shot](/shop-app/pictures/photo1.png)
